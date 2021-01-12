@@ -29,6 +29,7 @@ bool CeckUniqueWords(const std::string &word) //The function checks unique words
 	return true;
 }
 
+
 int ReadFromFile(const std::string &fileName)
 {
 	std::ifstream fin;
@@ -114,7 +115,7 @@ int main()
 	if (choose == 1)
 	{
 		string fileName;
-		cout << "Enter your path to your file: ";
+		cout << "Enter your path to your file: "; //For example: B:\Games\text.txt
 		getline(cin, fileName);
 		cout << "Number of unique words: " << ReadFromFile(fileName) << endl;
 	}
@@ -124,7 +125,7 @@ int main()
 		int count = ReadFromCosole();
 		cout << "Number of unique words: " << count << endl;
 	}
-
+	
 	system("pause");
 	return 0;
 }
