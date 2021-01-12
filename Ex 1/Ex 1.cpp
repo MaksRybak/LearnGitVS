@@ -112,7 +112,7 @@ int main()
 		cout << e.what() << endl;
 	}
 
-	if (choose == 1)
+	if (choose == 1) // Read text file
 	{
 		string fileName;
 		cout << "Enter your path to your file: "; //For example: B:\Games\text.txt
@@ -120,7 +120,7 @@ int main()
 		cout << "Number of unique words: " << ReadFromFile(fileName) << endl;
 	}
 
-	else if (choose == 2)
+	else if (choose == 2) //Write in console
 	{
 		int count = ReadFromCosole();
 		cout << "Number of unique words: " << count << endl;
