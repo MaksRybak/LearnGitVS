@@ -35,21 +35,32 @@ int ReadFromFile(std::string fileName)
 	std::ifstream fin;
 	std::ofstream fout;
 	fin.open(fileName);
-	fout.open("test2.txt");
-	std::string temp;
-	int count = 0;
-	while (!fin.eof())
+	try 
 	{
-		fin >> temp;
-		if (CeckUniqueWords(temp, "") && CheckRegister(temp))
+		if (!fin.is_open())
+			throw "file not found";
+		fout.open("test2.txt");
+		std::string temp;
+		int count = 0;
+		while (!fin.eof())
 		{
-			fout << temp << std::endl;
-			count++;
+			fin >> temp;
+			if (CeckUniqueWords(temp, "") && CheckRegister(temp))
+			{
+				fout << temp << std::endl;
+				count++;
+			}
 		}
+		fout.close();
+		fin.close();
+		return count;
 	}
-	fout.close();
-	fin.close();
-	return count;
+	catch (const char* ex)
+	{
+		std::cout << ex << std::endl;
+		return 0;
+	}
+	
 }
 
 int ReadFromCosole()
@@ -79,22 +90,38 @@ int ReadFromCosole()
 	return mySet.size();
 }
 
+
 int main()
 {
 	using namespace std;
-
 	int choose;
 
-	cout << "Make your choose: \n\t1)Read txt file (for big data);\n\t2)Write in console" << endl;
-	cin >> choose;
-	cin.ignore(3200, '\n');
+	try
+	{
+		cout << "Make your choose: \n\t1)Read txt file (for big data);\n\t2)Write in console" << endl;
+		cin >> choose;
+		cin.ignore(3200, '\n');
+		if (choose != 1 && choose != 2)
+			throw choose;
+	}
+	catch (int)
+	{
+		cout << "You did not enter an integer " << endl;
+	}
+	catch (const exception& e)
+	{
+		cout << e.what() << endl;
+	}
+	
 
 	if (choose == 1)
 	{
+		
 		string fileName;
 		cout << "Input your way to your file: ";
 		getline(cin, fileName);
 		cout << "Count words: " << ReadFromFile(fileName) << endl;
+
 	}
 
 	else if (choose == 2)
