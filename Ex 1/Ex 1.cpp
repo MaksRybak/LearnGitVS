@@ -4,23 +4,23 @@
 #include <fstream>
 
 
-bool CheckRegister(std::string value)
+bool CheckRegister(std::string value) //To check the range
 {
 	for (const auto& i : value)
-		if (static_cast<int>(i) < 97 || static_cast<int>(i) > 122)
+		if (static_cast<int>(i) < 97 || static_cast<int>(i) > 122) //Only a..z
 			return false;
 	return true;
 }
 
-bool CeckUniqueWords(std::string word)
+bool CeckUniqueWords(std::string word) //The function checks unique words 
 {
 	std::ifstream fin;
-	fin.open("test2.txt");
+	fin.open("UniqueWords.txt");
 	std::string str;
 	while (!fin.eof())
 	{
 		fin >> str;
-		if (str == word)
+		if (str == word) //check every word 
 		{
 			fin.close();
 			return false;
@@ -35,11 +35,11 @@ int ReadFromFile(std::string fileName)
 	std::ifstream fin;
 	std::ofstream fout;
 	fin.open(fileName);
-	try 
+	try
 	{
 		if (!fin.is_open())
 			throw "file not found";
-		fout.open("test2.txt");
+		fout.open("UniqueWords.txt");
 		std::string temp;
 		int count = 0;
 		while (!fin.eof())
@@ -60,19 +60,17 @@ int ReadFromFile(std::string fileName)
 		std::cout << ex << std::endl;
 		return 0;
 	}
-	
+
 }
 
 int ReadFromCosole()
 {
 	std::set<std::string> mySet;
-	std::cout << "Input your text pls: ";
-
+	std::cout << "Input your text: ";
 	std::string* text = new std::string;
 
 	std::getline(std::cin, *text);
 
-	std::string copyText = *text;
 	std::string temp;
 	int position(0);
 
@@ -98,7 +96,7 @@ int main()
 
 	try
 	{
-		cout << "Make your choose: \n\t1)Read txt file (for big data);\n\t2)Write in console" << endl;
+		cout << "Make your choice: \n\t1)Read text file (for big data);\n\t2)Write in console" << endl;
 		cin >> choose;
 		cin.ignore(3200, '\n');
 		if (choose != 1 && choose != 2)
@@ -112,25 +110,20 @@ int main()
 	{
 		cout << e.what() << endl;
 	}
-	
 
 	if (choose == 1)
 	{
-		
 		string fileName;
-		cout << "Input your way to your file: ";
+		cout << "Enter your path to your file: ";
 		getline(cin, fileName);
-		cout << "Count words: " << ReadFromFile(fileName) << endl;
-
+		cout << "Number of unique words: " << ReadFromFile(fileName) << endl;
 	}
 
 	else if (choose == 2)
 	{
 		int count = ReadFromCosole();
-		cout << "Count words: " << count << endl;
+		cout << "Number of unique words: " << count << endl;
 	}
-	else
-		cout << "You didn't choose =(" << endl;
 
 	system("pause");
 	return 0;
