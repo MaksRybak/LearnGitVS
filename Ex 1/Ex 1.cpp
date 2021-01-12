@@ -12,7 +12,7 @@ bool CheckRegister(std::string value)
 	return true;
 }
 
-bool CeckUniqueWords(std::string word, std::string namefile)
+bool CeckUniqueWords(std::string word)
 {
 	std::ifstream fin;
 	fin.open("test2.txt");
@@ -45,7 +45,7 @@ int ReadFromFile(std::string fileName)
 		while (!fin.eof())
 		{
 			fin >> temp;
-			if (CeckUniqueWords(temp, "") && CheckRegister(temp))
+			if (CeckUniqueWords(temp) && CheckRegister(temp))
 			{
 				fout << temp << std::endl;
 				count++;
