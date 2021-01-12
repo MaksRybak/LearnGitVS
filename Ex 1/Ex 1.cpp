@@ -85,7 +85,7 @@ int ReadFromCosole()
 	}
 
 	text->clear();
-
+	delete text;
 	return mySet.size();
 }
 
