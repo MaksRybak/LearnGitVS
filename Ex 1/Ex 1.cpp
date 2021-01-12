@@ -30,11 +30,11 @@ bool CeckUniqueWords(std::string word, std::string namefile)
 
 }
 
-int ReadFromFile()
+int ReadFromFile(std::string fileName)
 {
 	std::ifstream fin;
 	std::ofstream fout;
-	fin.open("test.txt");
+	fin.open(fileName);
 	fout.open("test2.txt");
 	std::string temp;
 	int count = 0;
@@ -85,13 +85,16 @@ int main()
 
 	int choose;
 
-	cout << "Make yout choose: \n\t1)Read txt file (for big data);\n\t2)Write in console" << endl;
+	cout << "Make your choose: \n\t1)Read txt file (for big data);\n\t2)Write in console" << endl;
 	cin >> choose;
 	cin.ignore(3200, '\n');
 
 	if (choose == 1)
 	{
-		cout << "Count words: " << ReadFromFile() << endl;
+		string fileName;
+		cout << "Input your way to your file: ";
+		getline(cin, fileName);
+		cout << "Count words: " << ReadFromFile(fileName) << endl;
 	}
 
 	else if (choose == 2)
