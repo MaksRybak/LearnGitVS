@@ -4,7 +4,7 @@
 #include <fstream>
 
 
-bool CheckRegister(std::string value) //To check the range
+bool CheckRegister(const std::string &value) //To check the range
 {
 	for (const auto& i : value)
 		if (static_cast<int>(i) < 97 || static_cast<int>(i) > 122) //Only a..z
@@ -12,14 +12,14 @@ bool CheckRegister(std::string value) //To check the range
 	return true;
 }
 
-bool CeckUniqueWords(std::string word) //The function checks unique words 
+bool CeckUniqueWords(const std::string &word) //The function checks unique words 
 {
 	std::ifstream fin;
-	fin.open("UniqueWords.txt");
+	fin.open("UniqueWords.txt"); //File for unique words
 	std::string str;
 	while (!fin.eof())
 	{
-		fin >> str;
+		fin >> str; //Read the word
 		if (str == word) //check every word 
 		{
 			fin.close();
@@ -27,10 +27,9 @@ bool CeckUniqueWords(std::string word) //The function checks unique words
 		}
 	}
 	return true;
-
 }
 
-int ReadFromFile(std::string fileName)
+int ReadFromFile(const std::string &fileName)
 {
 	std::ifstream fin;
 	std::ofstream fout;
@@ -39,9 +38,9 @@ int ReadFromFile(std::string fileName)
 	{
 		if (!fin.is_open())
 			throw "file not found";
-		fout.open("UniqueWords.txt");
+		fout.open("UniqueWords.txt"); //File for unique words
 		std::string temp;
-		int count = 0;
+		int count = 0; // Count unique words
 		while (!fin.eof())
 		{
 			fin >> temp;
@@ -58,9 +57,10 @@ int ReadFromFile(std::string fileName)
 	catch (const char* ex)
 	{
 		std::cout << ex << std::endl;
+		fout.close();
+		fin.close();
 		return 0;
 	}
-
 }
 
 int ReadFromCosole()
@@ -76,9 +76,9 @@ int ReadFromCosole()
 
 	while (position >= 0)
 	{
-		position = text->find(' ');
-		temp = text->substr(0, position);
-		text->erase(0, position + 1);
+		position = text->find(' ');//Looking for the index of the end of the word
+		temp = text->substr(0, position); //Save this word 
+		text->erase(0, position + 1); //Delete from the text
 		if (CheckRegister(temp))
 			mySet.insert(temp);
 	}
